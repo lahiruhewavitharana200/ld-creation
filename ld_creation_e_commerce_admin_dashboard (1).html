@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LD Creation - Custom Photo Frames E-Commerce & Admin Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#121212',
+                        cardBg: '#1a1a1a',
+                        borderGray: '#2a2a2a',
+                        goldAccent: '#d4af37',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-goldAccent selection:text-black">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#121212]/95 backdrop-blur-md border-b border-borderGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-lg bg-black border border-gray-700 flex items-center justify-center shadow-lg group-hover:border-goldAccent transition duration-300">
+                    <span class="text-gray-200 font-bold text-lg tracking-tighter">LD</span>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-wider text-white block">LD CREATION</span>
+                    <span class="text-xs text-goldAccent tracking-widest uppercase">Custom Frames</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-sm font-medium text-gray-300 hover:text-goldAccent transition">Home</a>
+                <a href="#gallery" class="text-sm font-medium text-gray-300 hover:text-goldAccent transition">Collections</a>
+                <a href="#custom-order" class="text-sm font-medium text-gray-300 hover:text-goldAccent transition">Custom Guide</a>
+                <a href="#about" class="text-sm font-medium text-gray-300 hover:text-goldAccent transition">About Us</a>
+                <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-goldAccent transition">Contact</a>
+            </nav>
+
+            <!-- Actions & Cart -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openAdminModal()" class="bg-cardBg border border-borderGray hover:border-goldAccent text-goldAccent px-3.5 py-2.5 rounded-xl flex items-center space-x-2 transition shadow-md text-xs font-semibold" title="Admin Dashboard">
+                    <i class="fa-solid fa-lock text-sm"></i>
+                    <span class="hidden sm:inline">Admin Panel</span>
+                </button>
+
+                <button id="cart-btn" class="relative bg-cardBg border border-borderGray hover:border-goldAccent text-gray-200 px-4 py-2.5 rounded-xl flex items-center space-x-2 transition shadow-md">
+                    <i class="fa-solid fa-cart-shopping text-goldAccent"></i>
+                    <span class="hidden sm:inline text-sm font-medium">Cart</span>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-goldAccent text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-b from-[#181818] to-darkBg overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-goldAccent/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-gray-700/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 bg-cardBg border border-borderGray px-4 py-2 rounded-full shadow-md">
+                    <span class="w-2.5 h-2.5 rounded-full bg-goldAccent animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest text-gray-300">Direct Online Ordering & Admin Upload</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Preserve Your Best Moments With <span class="text-transparent bg-clip-text bg-gradient-to-r from-goldAccent to-yellow-200">LD Creation</span>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0">
+                    Choose your frame design, upload your memorable photo, select your size, and place orders directly. Store owners can manage and add new designs via the built-in Admin Panel!
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <a href="#gallery" class="w-full sm:w-auto bg-goldAccent text-black font-bold px-8 py-4 rounded-xl shadow-xl hover:bg-yellow-500 transition duration-300 text-center flex items-center justify-center space-x-2">
+                        <span>Shop Collections</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <button onclick="openAdminModal()" class="w-full sm:w-auto bg-cardBg border border-borderGray text-goldAccent font-semibold px-8 py-4 rounded-xl hover:border-goldAccent transition duration-300 text-center flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Add New Design (Admin)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Visual Frame Showcase -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-2xl bg-cardBg border border-borderGray p-4 shadow-2xl overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Custom Photo Frame" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition duration-700">
+                    <div class="absolute bottom-6 left-6 right-6 z-20 space-y-2">
+                        <span class="bg-goldAccent text-black text-xs font-bold px-3 py-1 rounded-full">Featured Creation</span>
+                        <h3 class="text-xl font-bold text-white">Luxury Wooden LED Frame</h3>
+                        <p class="text-sm text-gray-300">Custom tailored with precision illumination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products & Gallery Section -->
+    <section id="gallery" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">Our Frame Collections</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Select a frame style, pick your preferred size, upload your photo, and add it straight to your cart.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 pt-6">
+                    <button class="filter-btn active bg-goldAccent text-black font-medium px-5 py-2 rounded-full text-sm transition shadow" data-filter="all">All Products</button>
+                    <button class="filter-btn bg-cardBg text-gray-300 hover:bg-gray-800 font-medium px-5 py-2 rounded-full text-sm transition border border-borderGray" data-filter="led">LED Frames</button>
+                    <button class="filter-btn bg-cardBg text-gray-300 hover:bg-gray-800 font-medium px-5 py-2 rounded-full text-sm transition border border-borderGray" data-filter="wooden">Wooden Frames</button>
+                    <button class="filter-btn bg-cardBg text-gray-300 hover:bg-gray-800 font-medium px-5 py-2 rounded-full text-sm transition border border-borderGray" data-filter="collage">Collage & Couple</button>
+                    <button class="filter-btn bg-cardBg text-gray-300 hover:bg-gray-800 font-medium px-5 py-2 rounded-full text-sm transition border border-borderGray" data-filter="acrylic">Acrylic Frames</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="product-grid">
+                <!-- Populated dynamically via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Customization / Step-by-Step Guide Section -->
+    <section id="custom-order" class="py-24 bg-[#141414] border-y border-borderGray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-goldAccent text-xs uppercase tracking-widest font-semibold">Easy Website Ordering</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white">How to Order Online</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Get your custom photo frame made by LD Creation in 3 simple steps.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-cardBg p-8 rounded-2xl border border-borderGray relative group hover:border-goldAccent transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-goldAccent text-black font-extrabold text-lg flex items-center justify-center mb-6 shadow">01</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Pick & Customize</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Choose your frame design, pick your size, and upload your high-resolution memory photo directly.</p>
+                </div>
+
+                <div class="bg-cardBg p-8 rounded-2xl border border-borderGray relative group hover:border-goldAccent transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-goldAccent text-black font-extrabold text-lg flex items-center justify-center mb-6 shadow">02</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Add to Cart & Checkout</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Review your items in the cart, fill in your delivery details, and submit your order securely.</p>
+                </div>
+
+                <div class="bg-cardBg p-8 rounded-2xl border border-borderGray relative group hover:border-goldAccent transition duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-goldAccent text-black font-extrabold text-lg flex items-center justify-center mb-6 shadow">03</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fast Delivery</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Our craftsmen handcraft your order with perfection and ship it securely right to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-cardBg border border-borderGray px-4 py-2 rounded-full">
+                        <span class="text-xs uppercase tracking-widest text-goldAccent font-semibold">About LD Creation</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                        Crafting Elegance & Preserving Memories
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed">
+                        At <strong class="text-white">LD Creation</strong>, we believe every photograph tells a unique story that deserves physical elegance. Our passion is transforming your treasured memories into durable works of art using premium quality framing materials and meticulous craftsmanship.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="border-l-2 border-goldAccent pl-4">
+                            <h4 class="text-white font-bold text-lg">Custom Sizing</h4>
+                            <p class="text-xs text-gray-400 mt-1">Tailored specifically to your spatial needs.</p>
+                        </div>
+                        <div class="border-l-2 border-goldAccent pl-4">
+                            <h4 class="text-white font-bold text-lg">Island-wide Delivery</h4>
+                            <p class="text-xs text-gray-400 mt-1">Secure and shock-resistant packaging.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-6 relative">
+                    <div class="aspect-[4/3] rounded-3xl bg-cardBg border border-borderGray overflow-hidden shadow-2xl relative">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Workshop" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <span class="text-goldAccent text-xs uppercase tracking-widest font-bold">Excellence in Every Frame</span>
+                            <h4 class="text-xl font-bold text-white">Built with passion & precision</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-black border-t border-borderGray pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-borderGray">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-cardBg border border-borderGray flex items-center justify-center">
+                        <span class="text-white font-bold text-lg tracking-tighter">LD</span>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-wider text-white block">LD CREATION</span>
+                        <span class="text-xs text-goldAccent tracking-widest uppercase">Custom Framing</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400">
+                    Transforming your memorable photos into timeless custom-built frames and LED masterpieces.
+                </p>
+                <div class="flex space-x-3 pt-2">
+                    <a href="https://www.facebook.com/profile.php?id=100063722344831" target="_blank" class="w-10 h-10 rounded-full bg-cardBg border border-borderGray flex items-center justify-center text-gray-300 hover:text-goldAccent hover:border-goldAccent transition">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="text-white font-semibold text-base">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#home" class="text-gray-400 hover:text-goldAccent transition">Home</a></li>
+                    <li><a href="#gallery" class="text-gray-400 hover:text-goldAccent transition">Frame Collection</a></li>
+                    <li><a href="#custom-order" class="text-gray-400 hover:text-goldAccent transition">Ordering Guide</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-goldAccent transition">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="text-white font-semibold text-base">Our Specialties</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li>LED Memory Frames</li>
+                    <li>Teak Wooden Frames</li>
+                    <li>Couple & Wedding Collages</li>
+                    <li>Acrylic Crystal Mounts</li>
+                    <li>Family Portrait Sets</li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="text-white font-semibold text-base">Customer Support</h4>
+                <p class="text-sm text-gray-400">Need help with your order? Reach out to us anytime.</p>
+                <button onclick="openAdminModal()" class="inline-flex items-center space-x-2 bg-goldAccent/10 text-goldAccent border border-goldAccent/30 text-xs font-semibold px-4 py-2.5 rounded-xl hover:bg-goldAccent hover:text-black transition">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Admin Dashboard Login</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+            <p>&copy; 2026 LD Creation. All Rights Reserved. Crafted with elegance.</p>
+            <p class="mt-2 sm:mt-0">Professional Custom Framing E-Commerce Platform</p>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART SLIDE-OVER DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div id="cart-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-[#161616] border-l border-borderGray flex flex-col shadow-2xl">
+                <div class="p-6 border-b border-borderGray flex items-center justify-between bg-[#121212]">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-cart-shopping text-goldAccent"></i>
+                        <h3 class="text-lg font-bold text-white">Your Shopping Cart</h3>
+                    </div>
+                    <button id="close-cart" class="text-gray-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-borderGray">
+                    <!-- Dynamic Cart Items -->
+                </div>
+
+                <div id="cart-footer" class="p-6 border-t border-borderGray bg-[#121212] space-y-4">
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between text-gray-400">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal" class="font-semibold text-white">LKR 0</span>
+                        </div>
+                        <div class="flex justify-between text-gray-400">
+                            <span>Island-wide Delivery</span>
+                            <span class="font-semibold text-white">LKR 450</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-borderGray">
+                            <span>Total Amount</span>
+                            <span id="cart-total" class="text-goldAccent">LKR 450</span>
+                        </div>
+                    </div>
+                    <button id="checkout-btn" onclick="openCheckoutModal()" class="w-full bg-goldAccent text-black font-bold py-3.5 rounded-xl uppercase tracking-wider text-sm hover:bg-yellow-500 transition shadow-lg flex items-center justify-center space-x-2">
+                        <span>Proceed to Checkout</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD MODAL -->
+    <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black/85 backdrop-blur-sm" onclick="closeAdminModal()"></div>
+        <div class="relative bg-cardBg border border-borderGray w-full max-w-2xl rounded-3xl p-6 sm:p-8 shadow-2xl z-10 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-borderGray pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-gauge-high text-goldAccent"></i>
+                    <span>LD Creation - Admin Dashboard</span>
+                </h3>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Add New Product Form -->
+            <form id="admin-product-form" onsubmit="addNewProduct(event)" class="space-y-4">
+                <div class="bg-black/40 border border-borderGray rounded-2xl p-4 space-y-4">
+                    <h4 class="text-sm font-bold text-goldAccent flex items-center space-x-2">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Add New Frame Design to Live Catalog</span>
+                    </h4>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Frame Title / Name *</label>
+                        <input type="text" id="admin-title" required class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="e.g. Royal Gold Wedding Frame">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Category *</label>
+                            <select id="admin-category" required class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent">
+                                <option value="led">LED Frames</option>
+                                <option value="wooden">Wooden Frames</option>
+                                <option value="collage">Collage & Couple</option>
+                                <option value="acrylic">Acrylic Frames</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Base Price (LKR) *</label>
+                            <input type="number" id="admin-price" required min="500" step="100" class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="4500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Product Description *</label>
+                        <textarea id="admin-desc" required rows="2" class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="Enter details about materials, lighting, or special features..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Upload Product Photo *</label>
+                        <input type="file" id="admin-image" accept="image/*" required class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-goldAccent file:text-black hover:file:bg-yellow-500 cursor-pointer bg-black border border-borderGray rounded-xl">
+                    </div>
+
+                    <button type="submit" class="w-full bg-goldAccent text-black font-bold py-3 rounded-xl uppercase tracking-wider text-xs hover:bg-yellow-500 transition shadow">
+                        <i class="fa-solid fa-cloud-arrow-up mr-1"></i> Save & Publish Design
+                    </button>
+                </div>
+            </form>
+
+            <div class="border-t border-borderGray pt-4 flex justify-between items-center text-xs text-gray-400">
+                <span>Designs are saved automatically in your browser</span>
+                <button onclick="closeAdminModal()" class="bg-cardBg border border-borderGray text-gray-200 px-4 py-2 rounded-xl hover:border-goldAccent transition">
+                    Close Admin Panel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="fixed inset-0 bg-black/80 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
+        <div class="relative bg-cardBg border border-borderGray w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl z-10 space-y-6">
+            <div class="flex items-center justify-between border-b border-borderGray pb-4">
+                <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-file-invoice-dollar text-goldAccent"></i>
+                    <span>Checkout & Delivery Details</span>
+                </h3>
+                <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Full Name *</label>
+                    <input type="text" id="cust-name" required class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="Enter your full name">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Phone Number (WhatsApp) *</label>
+                        <input type="tel" id="cust-phone" required class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="07X XXX XXXX">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">City / District *</label>
+                        <input type="text" id="cust-city" required class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="e.g. Colombo, Kandy">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Delivery Address *</label>
+                    <textarea id="cust-address" required rows="2" class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="House no, Street name, City"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Custom Notes / Instructions (Optional)</label>
+                    <textarea id="cust-notes" rows="2" class="w-full bg-black border border-borderGray rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-goldAccent" placeholder="Any specific details for your frame or photo..."></textarea>
+                </div>
+                
+                <div class="pt-4 border-t border-borderGray flex space-x-3">
+                    <button type="button" onclick="closeCheckoutModal()" class="w-1/2 bg-black border border-borderGray text-gray-300 py-3 rounded-xl text-xs font-bold uppercase tracking-wider hover:border-gray-500 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="w-1/2 bg-goldAccent text-black py-3 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-yellow-500 transition shadow">
+                        Place Order Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ORDER SUCCESS MODAL -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="fixed inset-0 bg-black/90 backdrop-blur-md"></div>
+        <div class="relative bg-cardBg border border-borderGray w-full max-w-lg rounded-3xl p-8 shadow-2xl z-10 text-center space-y-6">
+            <div class="w-16 h-16 bg-goldAccent/20 border border-goldAccent text-goldAccent rounded-full flex items-center justify-center mx-auto text-2xl shadow-lg">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Order Placed Successfully!</h3>
+                <p class="text-sm text-gray-400">Thank you for choosing LD Creation. Your custom frame order has been successfully registered.</p>
+            </div>
+            
+            <div id="order-summary-box" class="bg-black/60 border border-borderGray rounded-2xl p-4 text-left text-xs text-gray-300 space-y-2">
+                <!-- Summary -->
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button onclick="copyOrderDetails()" class="flex-1 bg-black border border-borderGray text-gray-200 py-3 rounded-xl text-xs font-bold uppercase tracking-wider hover:border-goldAccent transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-copy text-goldAccent"></i>
+                    <span>Copy Summary</span>
+                </button>
+                <button onclick="resetAndCloseSuccess()" class="flex-1 bg-goldAccent text-black py-3 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-yellow-500 transition shadow">
+                    Done / Return Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION JAVASCRIPT WITH LOCAL STORAGE -->
+    <script>
+        // Default initial products catalog
+        const defaultProducts = [
+            {
+                id: '1',
+                name: 'Warm Glow LED Photo Frame',
+                category: 'led',
+                price: 4500,
+                description: 'Illuminated memory frame with adjustable warm backlighting. Ideal for room decor or anniversaries.',
+                image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80',
+                badge: 'Best Seller',
+                sizes: [
+                    { name: '8 x 10 inches', price: 4500 },
+                    { name: '12 x 16 inches', price: 6500 },
+                    { name: '16 x 20 inches', price: 8900 }
+                ]
+            },
+            {
+                id: '2',
+                name: 'Classic Teak Finish Wooden Frame',
+                category: 'wooden',
+                price: 2800,
+                description: 'Elegant solid wood texture frame crafted to last generations. Perfect for family portraits and official photos.',
+                image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80',
+                badge: 'Classic',
+                sizes: [
+                    { name: '6 x 8 inches', price: 2800 },
+                    { name: '8 x 10 inches', price: 3600 },
+                    { name: '10 x 12 inches', price: 4500 }
+                ]
+            },
+            {
+                id: '3',
+                name: 'Romantic Couple Multi-Photo Collage',
+                category: 'collage',
+                price: 5200,
+                description: 'Display multiple memorable moments in one magnificent artistic layout. Ideal for weddings and anniversaries.',
+                image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80',
+                badge: 'Popular',
+                sizes: [
+                    { name: '10 x 14 inches (4 Photos)', price: 5200 },
+                    { name: '12 x 18 inches (6 Photos)', price: 6800 }
+                ]
+            },
+            {
+                id: '4',
+                name: 'Crystal Clear Acrylic Photo Mount',
+                category: 'acrylic',
+                price: 3900,
+                description: 'Sleek modern borderless acrylic print giving a floating 3D glossy effect to your photos.',
+                image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80',
+                badge: 'Modern',
+                sizes: [
+                    { name: '8 x 10 inches', price: 3900 },
+                    { name: '11 x 14 inches', price: 5500 }
+                ]
+            }
+        ];
+
+        // Load products from localStorage or fall back to default products
+        let products = JSON.parse(localStorage.getItem('ld_creation_products')) || defaultProducts;
+
+        function saveProductsToStorage() {
+            localStorage.setItem('ld_creation_products', JSON.stringify(products));
+        }
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Render Products Grid
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            let filtered = products;
+            if (currentFilter !== 'all') {
+                filtered = products.filter(p => p.category === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 space-y-3 bg-cardBg rounded-2xl border border-borderGray">
+                        <i class="fa-solid fa-box-open text-4xl text-gray-500"></i>
+                        <p class="text-sm text-gray-400">No products found in this category. Use the Admin Dashboard to add new designs!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(p => {
+                let sizeOptionsHtml = p.sizes.map((s, idx) => `
+                    <option value="${s.name}" data-price="${s.price}">
+                        ${s.name} ${idx > 0 ? '(+ LKR ' + (s.price - p.sizes[0].price).toLocaleString() + ')' : ''} - LKR ${s.price.toLocaleString()}
+                    </option>
+                `).join('');
+
+                html += `
+                    <div class="product-card bg-cardBg rounded-2xl border border-borderGray overflow-hidden group shadow-lg flex flex-col justify-between" data-category="${p.category}" data-id="${p.id}">
+                        <div class="relative aspect-[4/3] overflow-hidden bg-gray-900">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80'">
+                            ${p.badge ? `<span class="absolute top-3 right-3 bg-black/85 backdrop-blur-md text-goldAccent text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">${p.badge}</span>` : ''}
+                        </div>
+                        <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-lg font-bold text-white">${p.name}</h3>
+                                    <span class="text-goldAccent font-bold">LKR ${p.price.toLocaleString()}</span>
+                                </div>
+                                <p class="text-sm text-gray-400">${p.description}</p>
+                            </div>
+                            <div class="space-y-3 pt-4 border-t border-borderGray">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-400 mb-1">Select Size:</label>
+                                    <select class="size-select w-full bg-black border border-borderGray rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-goldAccent">
+                                        ${sizeOptionsHtml}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-400 mb-1">Custom Photo (Optional):</label>
+                                    <input type="file" accept="image/*" class="photo-input w-full text-xs text-gray-400 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-goldAccent file:text-black hover:file:bg-yellow-500 cursor-pointer">
+                                </div>
+                                <button onclick="addToCart('${p.id}', this)" class="w-full bg-goldAccent text-black font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-yellow-500 transition shadow">
+                                    <i class="fa-solid fa-cart-plus mr-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+        }
+
+        // Cart Drawer
+        const cartBtn = document.getElementById('cart-btn');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartBackdrop = document.getElementById('cart-backdrop');
+        const closeCartBtn = document.getElementById('close-cart');
+
+        function toggleCart() {
+            cartDrawer.classList.toggle('hidden');
+        }
+
+        cartBtn.addEventListener('click', toggleCart);
+        cartBackdrop.addEventListener('click', toggleCart);
+        closeCartBtn.addEventListener('click', toggleCart);
+
+        // Filter Buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-goldAccent', 'text-black');
+                    b.classList.add('bg-cardBg', 'text-gray-300', 'border', 'border-borderGray');
+                });
+                btn.classList.remove('bg-cardBg', 'text-gray-300', 'border', 'border-borderGray');
+                btn.classList.add('bg-goldAccent', 'text-black');
+
+                currentFilter = btn.getAttribute('data-filter');
+                renderProducts();
+            });
+        });
+
+        // Add to Cart Logic
+        function addToCart(productId, button) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const card = button.closest('.product-card');
+            const sizeSelect = card.querySelector('.size-select');
+            const selectedOption = sizeSelect.options[sizeSelect.selectedIndex];
+            const size = selectedOption.value;
+            const price = parseInt(selectedOption.getAttribute('data-price'));
+
+            const photoInput = card.querySelector('.photo-input');
+            const hasPhoto = photoInput.files.length > 0;
+            const photoName = hasPhoto ? photoInput.files[0].name : 'No photo uploaded';
+
+            const existingIndex = cart.findIndex(item => item.id === productId && item.size === size);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: price,
+                    size: size,
+                    image: product.image,
+                    photoName: photoName,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            cartDrawer.classList.remove('hidden');
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-cart-shopping text-4xl text-gray-600"></i>
+                        <p class="text-sm text-gray-400">Your cart is currently empty.</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = 'LKR 0';
+                cartTotal.textContent = 'LKR 450';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.quantity;
+                html += `
+                    <div class="py-4 flex space-x-4 items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl border border-borderGray flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80'">
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-sm font-bold text-white line-clamp-1">${item.name}</h4>
+                            <p class="text-xs text-gray-400">Size: ${item.size}</p>
+                            <p class="text-xs text-goldAccent font-semibold">LKR ${item.price.toLocaleString()}</p>
+                            <p class="text-[10px] text-gray-500 truncate">Photo: ${item.photoName}</p>
+                            
+                            <div class="flex items-center space-x-3 pt-1">
+                                <div class="flex items-center border border-borderGray rounded-lg bg-black">
+                                    <button onclick="updateQty(${index}, -1)" class="px-2 py-0.5 text-gray-400 hover:text-white">-</button>
+                                    <span class="px-2 text-xs font-semibold text-white">${item.quantity}</span>
+                                    <button onclick="updateQty(${index}, 1)" class="px-2 py-0.5 text-gray-400 hover:text-white">+</button>
+                                </div>
+                                <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-300 text-xs">
+                                    <i class="fa-solid fa-trash-can"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartSubtotal.textContent = 'LKR ' + subtotal.toLocaleString();
+            
+            const deliveryFee = 450;
+            const finalTotal = subtotal + deliveryFee;
+            cartTotal.textContent = 'LKR ' + finalTotal.toLocaleString();
+        }
+
+        function updateQty(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Admin Dashboard Modal Controls
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        // Admin Add Product (Saved to LocalStorage)
+        function addNewProduct(e) {
+            e.preventDefault();
+            const title = document.getElementById('admin-title').value;
+            const category = document.getElementById('admin-category').value;
+            const price = parseInt(document.getElementById('admin-price').value);
+            const desc = document.getElementById('admin-desc').value;
+            const imageInput = document.getElementById('admin-image');
+
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    saveNewProductObj(title, category, price, desc, imageUrl);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                saveNewProductObj(title, category, price, desc, 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80');
+            }
+        }
+
+        function saveNewProductObj(title, category, price, desc, imageUrl) {
+            const newId = 'prod-' + Date.now();
+            const newProduct = {
+                id: newId,
+                name: title,
+                category: category,
+                price: price,
+                description: desc,
+                image: imageUrl,
+                badge: 'New Design',
+                sizes: [
+                    { name: 'Standard Size', price: price },
+                    { name: 'Large Size', price: price + 2000 }
+                ]
+            };
+
+            products.unshift(newProduct);
+            saveProductsToStorage();
+            renderProducts();
+            closeAdminModal();
+            document.getElementById('admin-product-form').reset();
+            alert('New design successfully saved & published to live catalog!');
+        }
+
+        // Checkout Handling
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            cartDrawer.classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        let lastOrderData = null;
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const city = document.getElementById('cust-city').value;
+            const address = document.getElementById('cust-address').value;
+            const notes = document.getElementById('cust-notes').value;
+
+            const orderId = 'LDC-' + Math.floor(100000 + Math.random() * 900000);
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let total = subtotal + 450;
+
+            lastOrderData = { orderId, name, phone, city, address, notes, cart: [...cart], total };
+
+            const summaryBox = document.getElementById('order-summary-box');
+            let itemsText = cart.map(i => `${i.name} (${i.size}) x ${i.quantity} - LKR ${(i.price * i.quantity).toLocaleString()}`).join('<br>');
+            
+            summaryBox.innerHTML = `
+                <p><strong>Order ID:</strong> <span class="text-goldAccent">${orderId}</span></p>
+                <p><strong>Customer:</strong> ${name} (${phone})</p>
+                <p><strong>Delivery Address:</strong> ${address}, ${city}</p>
+                <div class="border-t border-borderGray pt-2 mt-2">
+                    <p class="font-semibold text-white mb-1">Items Ordered:</p>
+                    ${itemsText}
+                </div>
+                <div class="border-t border-borderGray pt-2 mt-2 flex justify-between font-bold text-white">
+                    <span>Total Amount (incl. Delivery):</span>
+                    <span class="text-goldAccent">LKR ${total.toLocaleString()}</span>
+                </div>
+            `;
+
+            closeCheckoutModal();
+            document.getElementById('success-modal').classList.remove('hidden');
+            cart = [];
+            updateCartUI();
+        }
+
+        function copyOrderDetails() {
+            if (!lastOrderData) return;
+            let text = `--- LD CREATION ORDER SUMMARY ---\nOrder ID: ${lastOrderData.orderId}\nName: ${lastOrderData.name}\nPhone: ${lastOrderData.phone}\nAddress: ${lastOrderData.address}, ${lastOrderData.city}\nNotes: ${lastOrderData.notes || 'None'}\n\nItems:\n` + 
+                lastOrderData.cart.map(i => `- ${i.name} [Size: ${i.size}] Qty: ${i.quantity} (LKR ${(i.price*i.quantity).toLocaleString()})`).join('\n') + 
+                `\n\nTotal: LKR ${lastOrderData.total.toLocaleString()}`;
+
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            alert('Order summary copied to clipboard!');
+        }
+
+        function resetAndCloseSuccess() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('checkout-form').reset();
+        }
+
+        // Initialize on Window Load
+        window.onload = function() {
+            renderProducts();
+        };
+    </script>
+</body>
+</html>
